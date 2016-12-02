@@ -29,7 +29,7 @@ public class TestJDBC {
 
         /* Connexion à la base de données */
 
-        String url = "jdbc:postgresql://localhost:5432/bdd_testBerger";
+        String url = "jdbc:postgresql://localhost:5432/EasyFood";
         String utilisateur = "postgres";
         String motDePasse = "postgres";
         Connection connexion = null;
