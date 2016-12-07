@@ -1,4 +1,4 @@
-package com.test.servlets;
+package com.ppe3_3.servlets;
 
 
 
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-import com.test.bdd.TestJDBC;
+import com.ppe3_3.bdd.TestJDBC;
 
 
 public class GestionTestJDBC extends HttpServlet {

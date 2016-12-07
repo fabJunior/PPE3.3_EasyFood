@@ -1,4 +1,4 @@
-package com.test.beans;
+package com.ppe3_3.beans;
 
 import java.sql.Timestamp;
 

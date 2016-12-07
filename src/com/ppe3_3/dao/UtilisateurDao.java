@@ -1,6 +1,6 @@
-package com.test.dao;
+package com.ppe3_3.dao;
 
-import com.test.beans.Utilisateur;
+import com.ppe3_3.beans.Utilisateur;
 
 public interface UtilisateurDao {
 

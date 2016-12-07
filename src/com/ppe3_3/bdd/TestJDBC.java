@@ -1,4 +1,4 @@
-package com.test.bdd;
+package com.ppe3_3.bdd;
 
 import java.sql.*;
 import java.util.ArrayList;

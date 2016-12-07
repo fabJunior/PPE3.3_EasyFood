@@ -1,4 +1,4 @@
-package com.test.dao;
+package com.ppe3_3.dao;
 
 public class DAOConfigurationException extends RuntimeException {
     /*

@@ -1,4 +1,4 @@
-package com.test.beans;
+package com.ppe3_3.beans;
 
 public class Allergie {
 	private int idR;

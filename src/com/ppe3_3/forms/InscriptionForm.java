@@ -1,4 +1,4 @@
-package com.test.forms;
+package com.ppe3_3.forms;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 
-import com.test.beans.Utilisateur;
-import com.test.dao.DAOException;
-import com.test.dao.UtilisateurDao;
+import com.ppe3_3.beans.Utilisateur;
+import com.ppe3_3.dao.DAOException;
+import com.ppe3_3.dao.UtilisateurDao;
 
 public final class InscriptionForm {
     private static final String CHAMP_EMAIL      = "email";

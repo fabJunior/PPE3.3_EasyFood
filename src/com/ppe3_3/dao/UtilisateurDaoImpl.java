@@ -1,14 +1,14 @@
-package com.test.dao;
+package com.ppe3_3.dao;
 
-import static com.test.dao.DAOUtilitaire.fermeturesSilencieuses;
-import static com.test.dao.DAOUtilitaire.initialisationRequetePreparee;
+import static com.ppe3_3.dao.DAOUtilitaire.fermeturesSilencieuses;
+import static com.ppe3_3.dao.DAOUtilitaire.initialisationRequetePreparee;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.test.beans.Utilisateur;
+import com.ppe3_3.beans.Utilisateur;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
 

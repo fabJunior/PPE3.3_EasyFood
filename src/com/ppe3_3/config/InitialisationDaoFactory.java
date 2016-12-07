@@ -1,4 +1,4 @@
-package com.test.config;
+package com.ppe3_3.config;
 
 import javax.servlet.ServletContext;
 
@@ -7,7 +7,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 
-import com.test.dao.DAOFactory;
+import com.ppe3_3.dao.DAOFactory;
 
 
 public class InitialisationDaoFactory implements ServletContextListener {

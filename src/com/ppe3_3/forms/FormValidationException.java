@@ -1,4 +1,4 @@
-package com.test.forms;
+package com.ppe3_3.forms;
 
 public class FormValidationException extends Exception {
     /*

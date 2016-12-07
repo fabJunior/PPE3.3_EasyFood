@@ -1,4 +1,4 @@
-package com.test.servlets;
+package com.ppe3_3.servlets;
 
 import java.io.IOException;
 
@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-import com.test.beans.Utilisateur;
+import com.ppe3_3.beans.Utilisateur;
 
-import com.test.dao.DAOFactory;
+import com.ppe3_3.dao.DAOFactory;
 
-import com.test.dao.UtilisateurDao;
+import com.ppe3_3.dao.UtilisateurDao;
 
-import com.test.forms.InscriptionForm;
+import com.ppe3_3.forms.InscriptionForm;
 
 
 public class Inscription extends HttpServlet {
