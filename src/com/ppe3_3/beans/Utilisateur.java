@@ -2,49 +2,104 @@ package com.ppe3_3.beans;
 
 import java.sql.Timestamp;
 
-public class Utilisateur {
+public class Utilisateur { /// modif by clement pour colle avec la bdd
 
-	private Long      id;
 
-    private String    email;
+    private String    mailU;
 
-    private String    motDePasse;
+    private String    pseudoU;
 
-    private String    nom;
-
-    private Timestamp dateInscription;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId( Long id ) {
-        this.id = id;   
-    }
+    private String    nomU;
     
-    public void setEmail(String email) {
-    	this.email = email;
-    }
+    private String		prenomU;
     
-    public String getEmail() {
-    	return email;
-    }
+    private int numAdrU;
+    
+    private String nomAdrU;
+    
+    private int cpU;
+    
+    private String villeU;
+    
+    private String mdpU;
+    
+    
 
-    public void setMotDePasse(String motDePasse) {
-    	this.motDePasse = motDePasse;
-    }
-    
-    public String getMotDePasse() {
-    	return motDePasse;
-    }
+    private Timestamp dateInscription; // --->  jai laissé le getter et setter 
 
-    public void setNom(String nom) {
-    	this.nom = nom;
-    }
     
-    public String getNom() {
-    	return nom;
-    }
+
+	public String getMailU() {
+		return mailU;
+	}
+
+	public void setMailU(String mailU) {
+		this.mailU = mailU;
+	}
+
+	public String getPseudoU() {
+		return pseudoU;
+	}
+
+	public void setPseudoU(String pseudoU) {
+		this.pseudoU = pseudoU;
+	}
+
+	public String getNomU() {
+		return nomU;
+	}
+
+	public void setNomU(String nomU) {
+		this.nomU = nomU;
+	}
+
+	public String getPrenomU() {
+		return prenomU;
+	}
+
+	public void setPrenomU(String prenomU) {
+		this.prenomU = prenomU;
+	}
+
+	public int getNumAdrU() {
+		return numAdrU;
+	}
+
+	public void setNumAdrU(int numAdrU) {
+		this.numAdrU = numAdrU;
+	}
+
+	public String getNomAdrU() {
+		return nomAdrU;
+	}
+
+	public void setNomAdrU(String nomAdrU) {
+		this.nomAdrU = nomAdrU;
+	}
+
+	public int getCpU() {
+		return cpU;
+	}
+
+	public void setCpU(int cpU) {
+		this.cpU = cpU;
+	}
+
+	public String getVilleU() {
+		return villeU;
+	}
+
+	public void setVilleU(String villeU) {
+		this.villeU = villeU;
+	}
+
+	public String getMdpU() {
+		return mdpU;
+	}
+
+	public void setMdpU(String mdpU) {
+		this.mdpU = mdpU;
+	}
 
 	public Timestamp getDateInscription() {
 		return dateInscription;
