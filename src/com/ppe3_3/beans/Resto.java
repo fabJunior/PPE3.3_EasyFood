@@ -1,6 +1,6 @@
 package com.ppe3_3.beans;
 
-public class Resto {
+public class Resto { //-->bY JL
 	private int idR;
 	private String mailU;
 	private String nomR;

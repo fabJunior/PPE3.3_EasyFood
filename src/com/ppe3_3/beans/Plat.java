@@ -1,6 +1,6 @@
 package com.ppe3_3.beans;
 
-public class Plat {
+public class Plat { //-->bY JL
 	private int idP;
 	private String nomP;
 	private String prixFournisseurP;
