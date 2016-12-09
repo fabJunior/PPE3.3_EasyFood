@@ -2,6 +2,7 @@ package com.ppe3_3.beans;
 
 public class Resto {
 	private int idR;
+	private String mailU;
 	private String nomR;
 	private int numAdrR;
 	private String rueAdrR;
@@ -78,6 +79,18 @@ public class Resto {
 	 */
 	public void setVilleR(String villeR) {
 		this.villeR = villeR;
+	}
+	/**
+	 * @return the mailU
+	 */
+	public String getMailU() {
+		return mailU;
+	}
+	/**
+	 * @param mailU the mailU to set
+	 */
+	public void setMailU(String mailU) {
+		this.mailU = mailU;
 	}
 	
 	
