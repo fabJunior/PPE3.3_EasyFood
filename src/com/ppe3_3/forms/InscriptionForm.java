@@ -13,9 +13,9 @@ import com.ppe3_3.dao.UtilisateurDao;
 
 public final class InscriptionForm {
     private static final String CHAMP_EMAIL      = "email";
-    private static final String CHAMP_PASS       = "motdepasse";
-    private static final String CHAMP_CONF       = "confirmation";
-    private static final String CHAMP_NOM        = "nom";
+    private static final String CHAMP_PASS       = "password";
+    private static final String CHAMP_CONF       = "password_confirm";
+    private static final String CHAMP_NOM        = "pseudo";
 
     private static final String ALGO_CHIFFREMENT = "SHA-256";
 
@@ -134,8 +134,8 @@ public final class InscriptionForm {
         if ( motDePasse != null && confirmation != null ) {
             if ( !motDePasse.equals( confirmation ) ) {
                 throw new FormValidationException( "Les mots de passe entrés sont différents, merci de les saisir à nouveau." );
-            } else if ( motDePasse.length() < 3 ) {
-                throw new FormValidationException( "Les mots de passe doivent contenir au moins 3 caractères." );
+            } else if ( motDePasse.length() < 6 ) {
+                throw new FormValidationException( "Les mots de passe doivent contenir au moins 6 caractères." );
             }
         } else {
             throw new FormValidationException( "Merci de saisir et confirmer votre mot de passe." );
@@ -144,8 +144,8 @@ public final class InscriptionForm {
 
     /* Validation du nom */
     private void validationNom( String nom ) throws FormValidationException {
-        if ( nom != null && nom.length() < 3 ) {
-            throw new FormValidationException( "Le nom d'utilisateur doit contenir au moins 3 caractères." );
+        if ( nom != null && nom.length() < 6 ) {
+            throw new FormValidationException( "Le nom d'utilisateur doit contenir au moins 6 caractères." );
         }
     }
 
