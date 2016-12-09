@@ -71,7 +71,7 @@ public final class InscriptionForm {
         } catch ( FormValidationException e ) {
             setErreur( CHAMP_EMAIL, e.getMessage() );
         }
-        utilisateur.setEmail( email );
+        utilisateur.setMailU( email );
     }
 
     /*
@@ -100,7 +100,7 @@ public final class InscriptionForm {
         passwordEncryptor.setPlainDigest( false );
         String motDePasseChiffre = passwordEncryptor.encryptPassword( motDePasse );
 
-        utilisateur.setMotDePasse( motDePasseChiffre );
+        utilisateur.setMdpU( motDePasseChiffre );
     }
 
     /*
@@ -113,7 +113,7 @@ public final class InscriptionForm {
         } catch ( FormValidationException e ) {
             setErreur( CHAMP_NOM, e.getMessage() );
         }
-        utilisateur.setNom( nom );
+        utilisateur.setNomU( nom );
     }
 
     /* Validation de l'adresse email */
