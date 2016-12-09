@@ -18,7 +18,7 @@ import java.util.Properties;
 public class DAOFactory {
 
 
-    private static final String FICHIER_PROPERTIES       = "/com/test/dao/dao.properties";
+    private static final String FICHIER_PROPERTIES       = "/com/ppe3_3/dao/dao.properties";
 
     private static final String PROPERTY_URL             = "url";
 
