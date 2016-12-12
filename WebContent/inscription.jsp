@@ -45,7 +45,7 @@
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="email" name="email" type="email">
+					<input id="email" name="email" type="text">
 					<label for="email" data-error="Veuillez entrer une addresse mail valide" style="width: 100%">Email*</label>
 				</div>
 			</div>
