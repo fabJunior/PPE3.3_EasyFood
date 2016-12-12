@@ -26,10 +26,10 @@
 
 
 	<div class="row" style="padding-left: 10%; padding-right: 10%">
-		<form class="col s12" method="post" action="inscription">
+		<form id="myform" class="col s12" method="post" action="inscription">
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="pseudo" type="text" class="validate">
+					<input id="pseudo" name="pseudo" type="text" class="validate">
 					<label for="pseudo">Pseudo*</label>
 				</div>
 			</div>
@@ -81,7 +81,7 @@
 		});
 
 		$("#password_confirm").on("input", function (e) {
-			if ($("#password").val() != $(this).val()  || $(this).val().length == 0) {
+			if ($("#password").val() != $(this).val()) {
 				$(this).removeClass("valid").addClass("invalid");
 			} else {
 				$(this).removeClass("invalid").addClass("valid");
@@ -91,7 +91,7 @@
 		$("#email").on("input", function (e) {
 			var re = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/gi;
 			var str = $(this).val();
-			if (!str.match(re)) {
+			if (!str.match(re) || $(this).val().length == 0) {
 				$(this).removeClass("valid").addClass("invalid");
 			} else {
 				$(this).removeClass("invalid").addClass("valid");
@@ -105,6 +105,27 @@
 				$(this).removeClass("invalid").addClass("valid");
 			}
 		});
+
+		$("#myform").validate({
+			submitHandler: function(form) {
+				var form_data= [$("#pseudo"), $("#password"), $("#password_confirm"), $("#email")];
+				var error_free=true;
+				
+				for (var input in form_data){
+					var valid = form_data[input].hasClass("valid");
+					
+					if (!valid){
+						error_free=false;
+					}
+				}
+
+				if (error_free){
+					form.submit();
+				}
+			}
+		});
+
+
 	</script>
 	<!--
 	<fieldset>
