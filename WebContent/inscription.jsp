@@ -133,8 +133,15 @@
 
 		$(document).ready(function() {
 			$('label').disableSelection();
-			if ($("#pseudo").val().length > 0) {
-				$("#pseudo").trigger("input");
+			
+			var form_data= [$("#pseudo"), $("#password"), $("#password_confirm"), $("#email")];
+
+			//Fausse erreur, la syntaxe est bonne
+			for (var input of form_data) {
+				if(input.val().length > 0 && !(input.hasClass("valid") || input.hasClass("invalid")))
+				{
+					input.trigger("input");
+				}
 			}
 		});
 
@@ -204,11 +211,12 @@
 				var form_data= [$("#pseudo"), $("#password"), $("#password_confirm"), $("#email")];
 				var error_free=true;
 
-				for (var input in form_data){
-					var valid = form_data[input].hasClass("valid");
+				//Fausse erreur, la syntaxe est bonne
+				for (var input of form_data){
+					var valid = input.hasClass("valid");
 
 					if (!valid){
-						form_data[input].removeClass("valid").addClass("invalid");
+						input.removeClass("valid").addClass("invalid");
 						error_free=false;
 					}
 				}
