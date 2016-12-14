@@ -29,7 +29,7 @@
 		<form id="myform" class="col s12" method="post" action="inscription">
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="pseudo" name="pseudo" type="text" class="validate">
+					<input id="pseudo" name="pseudo" type="text" class="validate" value="<c:out value="${utilisateur.nomU}"/>">
 					<label for="pseudo">Pseudo*</label>
 				</div>
 			</div>
@@ -45,7 +45,7 @@
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="email" name="email" type="text">
+					<input id="email" name="email" type="text" value="<c:out value="${utilisateur.mailU}"/>">
 					<label for="email" data-error="Veuillez entrer une addresse mail valide" style="width: 100%">Email*</label>
 				</div>
 			</div>
@@ -58,14 +58,40 @@
 			</div>
 		</form>
 		<div class="row">
-			<div class="cold s12">
+			<div class="col s12">
 				<p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
 			</div>
 		</div>
 	</div>
 
 
+	<div class="row" style="padding-left: 10%; padding-right: 10%">
+		<p id="log"></p><!-- Peut être utilisé pour debug -->
+	</div>
+
+
+
 	<script type="text/javascript">
+		/*Retire les validation par défaut (peut engendrer un bug où un champ est valid et invalid à la fois)*/
+		$.validator.setDefaults({
+			onkeyup: function () {
+				return false;
+			}()
+		});
+
+		$.validator.setDefaults({
+			onfocusout: function () {
+				return false;
+			}()
+		});
+
+		$.validator.setDefaults({
+			onfocusin: function () {
+				return false;
+			}()
+
+		});
+
 		$("#password").on("input", function (e) {
 			if($(this).val().length < 6) {
 				$(this).removeClass("valid").addClass("invalid");
