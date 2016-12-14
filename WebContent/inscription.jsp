@@ -24,31 +24,64 @@
 
 <body>
 
+	<!-- FORM -->
 
 	<div class="row" style="padding-left: 10%; padding-right: 10%">
 		<form id="myform" class="col s12" method="post" action="inscription">
+
+			<!-- PSEUDO -->
+
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="pseudo" name="pseudo" type="text" class="validate" value="<c:out value="${utilisateur.nomU}"/>">
-					<label for="pseudo">Pseudo*</label>
+					<input id="pseudo" name="pseudo" type="text" value="${utilisateur.nomU}" class="${form.erreurs['pseudo'] == null ? '' : 'invalid'}">
+					<c:set var ="pseudoErr" value="${form.erreurs['pseudo']}" scope="page" />
+					<c:if test="${pseudoErr == null || empty pseudoErr}">
+						<c:set var ="pseudoErr" value="Votre pseudo doit contenir au moints 6 caractères" scope="page" />
+					</c:if>
+					<label for="pseudo" data-error="${pseudoErr}" style="width: 100%">Pseudo*</label>
 				</div>
 			</div>
+
+			<!-- MOT DE PASSE + CONFIRMATION -->
+
 			<div class="row">
+				<!-- MOT DE PASSE -->
 				<div class="input-field col s6">
-					<input id="password" name="password" type="password">
-					<label for="password" data-error="Votre mot de passe doit conteir au moins 6 caractères" style="width: 100%">Mot de passe*</label>
+					<input id="password" name="password" type="password" class="${form.erreurs['password'] == null ? '' : 'invalid'}">
+					<c:set var ="passwordErr" value="${form.erreurs['password']}" scope="page" />
+					<c:if test="${passwordErr == null || empty passwordErr}">
+						<c:set var ="passwordErr" value="Votre mot de passe doit contenir au moins 6 caractères" scope="page" />
+					</c:if>
+					<label for="password" data-error="${passwordErr}" style="width: 100%">Mot de passe*</label>
 				</div>
+
+				<!-- CONFIRMATION -->
+
 				<div class="input-field col s6">
 					<input id="password_confirm" name="password_confirm" type="password">
-					<label for="password_confirm" data-error="Les mots de passe sont differents" style="width: 100%">Comfirmation*</label>
+					<c:set var ="password_confirmErr" value="${form.erreurs['password_confirm']}" scope="page" />
+					<c:if test="${password_confirmErr == null || empty password_confirmErr}">
+						<c:set var ="password_confirmErr" value="Les mots de passe sont differents" scope="page" />
+					</c:if>
+					<label for="password_confirm" data-error="${password_confirmErr}" style="width: 100%">Confirmation*</label>
 				</div>
 			</div>
+
+			<!-- EMAIL -->
+
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="email" name="email" type="text" value="<c:out value="${utilisateur.mailU}"/>">
-					<label for="email" data-error="Veuillez entrer une addresse mail valide" style="width: 100%">Email*</label>
+					<input id="email" name="email" type="text" value="${utilisateur.mailU}" class="${form.erreurs['email'] == null ? '' : 'invalid'}">
+					<c:set var ="emailErr" value="${form.erreurs['email']}" scope="page" />
+					<c:if test="${emailErr == null || empty emailErr}">
+						<c:set var ="emailErr" value="Veuillez entrer une addresse mail valide" scope="page" />
+					</c:if>
+					<label for="email" data-error="${emailErr}" style="width: 100%">Email*</label>
 				</div>
 			</div>
+
+			<!-- SUBMIT -->
+
 			<div class="row">
 				<div class="input-field col s12">
 					<button class="btn waves-effect waves-light" type="submit" name="action">Submit
@@ -98,7 +131,7 @@
 			} else {
 				$(this).removeClass("invalid").addClass("valid");
 			}
-			
+
 			if ($(this).val() != $("#password_confirm").val()) {
 				$("#password_confirm").removeClass("valid").addClass("invalid");
 			} else {
@@ -125,7 +158,7 @@
 		});
 
 		$("#pseudo").on("input", function (e) {
-			if ($(this).val().length == 0) {
+			if ($(this).val().length < 6) {
 				$(this).removeClass("valid").addClass("invalid");
 			} else {
 				$(this).removeClass("invalid").addClass("valid");
@@ -136,10 +169,10 @@
 			submitHandler: function(form) {
 				var form_data= [$("#pseudo"), $("#password"), $("#password_confirm"), $("#email")];
 				var error_free=true;
-				
+
 				for (var input in form_data){
 					var valid = form_data[input].hasClass("valid");
-					
+
 					if (!valid){
 						error_free=false;
 					}
