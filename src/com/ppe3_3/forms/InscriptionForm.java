@@ -15,7 +15,7 @@ public final class InscriptionForm {
     private static final String CHAMP_EMAIL      = "email";
     private static final String CHAMP_PASS       = "password";
     private static final String CHAMP_CONF       = "password_confirm";
-    private static final String CHAMP_NOM        = "pseudo";
+    private static final String CHAMP_PSEUDO     = "pseudo";
 
     private static final String ALGO_CHIFFREMENT = "SHA-256";
 
@@ -39,13 +39,13 @@ public final class InscriptionForm {
         String email = getValeurChamp( request, CHAMP_EMAIL );
         String motDePasse = getValeurChamp( request, CHAMP_PASS );
         String confirmation = getValeurChamp( request, CHAMP_CONF );
-        String nom = getValeurChamp( request, CHAMP_NOM );
+        String pseudo = getValeurChamp( request, CHAMP_PSEUDO );
 
         Utilisateur utilisateur = new Utilisateur();
         try {
             traiterEmail( email, utilisateur );
             traiterMotsDePasse( motDePasse, confirmation, utilisateur );
-            traiterNom( nom, utilisateur );
+            traiterPseudo( pseudo, utilisateur );
 
             if ( erreurs.isEmpty() ) {
                 utilisateurDao.creer( utilisateur );
@@ -104,16 +104,16 @@ public final class InscriptionForm {
     }
 
     /*
-     * Appel à la validation du nom reçu et initialisation de la propriété nom
+     * Appel à la validation du pseudo reçu et initialisation de la propriété pseudo
      * du bean
      */
-    private void traiterNom( String nom, Utilisateur utilisateur ) {
+    private void traiterPseudo( String pseudo, Utilisateur utilisateur ) {
         try {
-            validationNom( nom );
+            validationPseudo( pseudo );
         } catch ( FormValidationException e ) {
-            setErreur( CHAMP_NOM, e.getMessage() );
+            setErreur( CHAMP_PSEUDO, e.getMessage() );
         }
-        utilisateur.setNomU( nom );
+        utilisateur.setPseudoU( pseudo );
     }
 
     /* Validation de l'adresse email */
@@ -142,10 +142,10 @@ public final class InscriptionForm {
         }
     }
 
-    /* Validation du nom */
-    private void validationNom( String nom ) throws FormValidationException {
-        if ( nom != null && nom.length() < 6 ) {
-            throw new FormValidationException( "Le nom d'utilisateur doit contenir au moins 6 caractères." );
+    /* Validation du pseudo */
+    private void validationPseudo( String pseudo ) throws FormValidationException {
+        if ( pseudo != null && pseudo.length() < 6 ) {
+            throw new FormValidationException( "Le pseudo d'utilisateur doit contenir au moins 6 caractères." );
         }
     }
 

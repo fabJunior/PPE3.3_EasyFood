@@ -12,8 +12,8 @@ import com.ppe3_3.beans.Utilisateur;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
 
-    private static final String SQL_SELECT_PAR_EMAIL = "SELECT mailu, mdpu, nomu FROM utilisateur WHERE mailu = ?";
-    private static final String SQL_INSERT           = "INSERT INTO utilisateur (mailu, mdpu, nomu) VALUES (?, ?, ?)";
+    private static final String SQL_SELECT_PAR_EMAIL = "SELECT mailu, mdpu, pseudou, numadru FROM utilisateur WHERE mailu = ?";
+    private static final String SQL_INSERT           = "INSERT INTO utilisateur (mailu, mdpu, pseudou) VALUES (?, ?, ?)";
 
     private DAOFactory          daoFactory;
 
@@ -36,16 +36,10 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
         try {
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true, utilisateur.getMailU(), utilisateur.getMdpU(), utilisateur.getNomU() );
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true, utilisateur.getMailU(), utilisateur.getMdpU(), utilisateur.getPseudoU() );
             int statut = preparedStatement.executeUpdate();
             if ( statut == 0 ) {
                 throw new DAOException( "Échec de la création de l'utilisateur, aucune ligne ajoutée dans la table." );
-            }
-            valeursAutoGenerees = preparedStatement.getGeneratedKeys();
-            if ( valeursAutoGenerees.next() ) {
-                utilisateur.setMailU( valeursAutoGenerees.getString( 1 ) );
-            } else {
-                throw new DAOException( "Échec de la création de l'utilisateur en base, aucun ID auto-généré retourné." );
             }
         } catch ( SQLException e ) {
             throw new DAOException( e );
@@ -96,8 +90,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.setMailU( resultSet.getString( "mailU" ) );
         utilisateur.setMdpU( resultSet.getString( "mdpU" ) );
-        utilisateur.setNomU( resultSet.getString( "nomU" ) );
-        utilisateur.setDateInscription( resultSet.getTimestamp( "date_inscription" ) );
+        utilisateur.setPseudoU( resultSet.getString( "pseudoU" ) );
         return utilisateur;
     }
 
