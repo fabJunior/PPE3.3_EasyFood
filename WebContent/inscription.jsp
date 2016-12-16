@@ -104,6 +104,7 @@
 						<button class="btn waves-effect waves-light" type="submit" name="action">Submit
 							<i class="material-icons right">send</i>
 						</button>
+						<span class="new badge" data-badge-caption="* informations obligatoires "></span>
 					</div>
 				</div>
 			</form>
