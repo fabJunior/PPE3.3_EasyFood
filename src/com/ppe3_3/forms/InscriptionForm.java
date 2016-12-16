@@ -55,6 +55,7 @@ public final class InscriptionForm {
             }
         } catch ( DAOException e ) {
             resultat = "Échec de l'inscription : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
+            erreurs.put( "SQL" , "Erreur SQL" );
             e.printStackTrace();
         }
 
@@ -119,7 +120,7 @@ public final class InscriptionForm {
     /* Validation de l'adresse email */
     private void validationEmail( String email ) throws FormValidationException {
         if ( email != null ) {
-            if ( !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
+            if ( !email.matches( "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$" ) ) {
                 throw new FormValidationException( "Merci de saisir une adresse mail valide." );
             } else if ( utilisateurDao.trouver( email ) != null ) {
                 throw new FormValidationException( "Cette adresse email est déjà utilisée, merci d'en choisir une autre." );

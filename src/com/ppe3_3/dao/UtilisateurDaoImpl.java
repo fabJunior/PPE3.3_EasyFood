@@ -12,8 +12,8 @@ import com.ppe3_3.beans.Utilisateur;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
 
-    private static final String SQL_SELECT_PAR_EMAIL = "SELECT mailu, mdpu, pseudou, numadru FROM utilisateur WHERE mailu = ?";
-    private static final String SQL_INSERT           = "INSERT INTO utilisateur (mailu, mdpu, pseudou) VALUES (?, ?, ?)";
+    private static final String SQL_SELECT_PAR_EMAIL = "SELECT mailu, mdpu, pseudou, numadru, typeu FROM utilisateur WHERE mailu = ?";
+    private static final String SQL_INSERT           = "INSERT INTO utilisateur (mailu, mdpu, pseudou, typeu) VALUES (?, ?, ?, ?)";
 
     private DAOFactory          daoFactory;
 
@@ -36,7 +36,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
         try {
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true, utilisateur.getMailU(), utilisateur.getMdpU(), utilisateur.getPseudoU() );
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true, utilisateur.getMailU(), utilisateur.getMdpU(), utilisateur.getPseudoU(), utilisateur.getTypeU() );
             int statut = preparedStatement.executeUpdate();
             if ( statut == 0 ) {
                 throw new DAOException( "Échec de la création de l'utilisateur, aucune ligne ajoutée dans la table." );
@@ -91,6 +91,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         utilisateur.setMailU( resultSet.getString( "mailU" ) );
         utilisateur.setMdpU( resultSet.getString( "mdpU" ) );
         utilisateur.setPseudoU( resultSet.getString( "pseudoU" ) );
+        utilisateur.setTypeU( resultSet.getString( "typeU" ) );
         return utilisateur;
     }
 

@@ -5,29 +5,30 @@ import java.sql.Timestamp;
 public class Utilisateur { /// modif by clement pour colle avec la bdd
 
 
-    private String    mailU;
+	private String    mailU;
 
-    private String    pseudoU;
+	private String    pseudoU;
 
-    private String    nomU;
-    
-    private String		prenomU;
-    
-    private int numAdrU;
-    
-    private String nomAdrU;
-    
-    private int cpU;
-    
-    private String villeU;
-    
-    private String mdpU;
-    
-    
+	private String    nomU;
 
-    private Timestamp dateInscription; // --->  jai laissé le getter et setter 
+	private String		prenomU;
 
-    
+	private int numAdrU;
+
+	private String nomAdrU;
+
+	private int cpU;
+
+	private String villeU;
+
+	private String mdpU;
+
+	private String typeU;
+
+
+	private Timestamp dateInscription; // --->  jai laissé le getter et setter 
+
+
 
 	public String getMailU() {
 		return mailU;
@@ -99,6 +100,14 @@ public class Utilisateur { /// modif by clement pour colle avec la bdd
 
 	public void setMdpU(String mdpU) {
 		this.mdpU = mdpU;
+	}
+
+	public String getTypeU() {
+		return typeU;
+	}
+
+	public void setTypeU(String typeU) {
+		this.typeU = typeU;
 	}
 
 	public Timestamp getDateInscription() {

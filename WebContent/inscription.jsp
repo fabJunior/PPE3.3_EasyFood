@@ -87,6 +87,23 @@
 					</div>
 				</div>
 
+				<h4>
+					<span class="teal-text text-lighten-2">Je suis un :</span>
+				</h4>
+
+				<div class="row">
+					<div class="input-field col s6">
+						<input name="type" type="radio" id="type1" checked/>
+						<label for="type1">Client</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<input name="type" type="radio" id="type2"/>
+						<label for="type2">Restaurant</label>
+					</div>
+				</div>
+
 				<!-- SUBMIT -->
 
 				<div class="row">
