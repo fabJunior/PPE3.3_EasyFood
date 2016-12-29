@@ -23,6 +23,4 @@ public class Client extends Utilisateur {
 	public void setCommentaireVisible(String commentaireVisible) {
 		this.commentaireVisible = commentaireVisible;
 	}
-	
-	
 }
