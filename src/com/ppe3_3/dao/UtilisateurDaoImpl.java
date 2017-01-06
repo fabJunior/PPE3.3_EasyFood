@@ -12,41 +12,41 @@ import com.ppe3_3.beans.Utilisateur;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
 
-    private static final String SQL_SELECT_PAR_EMAIL = "SELECT mailu, mdpu, pseudou, numadru, typeu FROM utilisateur WHERE mailu = ?";
-    private static final String SQL_INSERT           = "INSERT INTO utilisateur (mailu, mdpu, pseudou, typeu) VALUES (?, ?, ?, ?)";
+	private static final String SQL_SELECT_PAR_EMAIL = "SELECT mailu, mdpu, pseudou, nomu, prenomu, numAdru, nomAdru, cpu, villeu, typeu FROM utilisateur WHERE mailu = ?";
+	private static final String SQL_INSERT           = "INSERT INTO utilisateur (mailu, mdpu, pseudou, nomu, prenomu, numAdru, nomAdru, cpu, villeu, typeu) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    private DAOFactory          daoFactory;
+	private DAOFactory          daoFactory;
 
-    UtilisateurDaoImpl( DAOFactory daoFactory ) {
-        this.daoFactory = daoFactory;
-    }
+	UtilisateurDaoImpl( DAOFactory daoFactory ) {
+		this.daoFactory = daoFactory;
+	}
 
-    /* Implémentation de la méthode définie dans l'interface UtilisateurDao */
-    @Override
-    public Utilisateur trouver( String email ) throws DAOException {
-        return trouver( SQL_SELECT_PAR_EMAIL, email );
-    }
+	/* Implémentation de la méthode définie dans l'interface UtilisateurDao */
+	@Override
+	public Utilisateur trouver( String email ) throws DAOException {
+		return trouver( SQL_SELECT_PAR_EMAIL, email );
+	}
 
-    /* Implémentation de la méthode définie dans l'interface UtilisateurDao */
-    @Override
-    public void creer( Utilisateur utilisateur ) throws DAOException {
-        Connection connexion = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet valeursAutoGenerees = null;
+	/* Implémentation de la méthode définie dans l'interface UtilisateurDao */
+	@Override
+	public void creer( Utilisateur utilisateur ) throws DAOException {
+		Connection connexion = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet valeursAutoGenerees = null;
 
-        try {
-            connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true, utilisateur.getMailU(), utilisateur.getMdpU(), utilisateur.getPseudoU(), utilisateur.getTypeU() );
-            int statut = preparedStatement.executeUpdate();
-            if ( statut == 0 ) {
-                throw new DAOException( "Échec de la création de l'utilisateur, aucune ligne ajoutée dans la table." );
-            }
-        } catch ( SQLException e ) {
-            throw new DAOException( e );
-        } finally {
-            fermeturesSilencieuses( valeursAutoGenerees, preparedStatement, connexion );
-        }
-    }
+		try {
+			connexion = daoFactory.getConnection();
+			preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true, utilisateur.getMailU(), utilisateur.getMdpU(), utilisateur.getPseudoU(), utilisateur.getNomU(), utilisateur.getPrenomU(), utilisateur.getNumAdrU(), utilisateur.getNomAdrU(), utilisateur.getCpU(), utilisateur.getVilleU(), utilisateur.getTypeU() );
+			int statut = preparedStatement.executeUpdate();
+			if ( statut == 0 ) {
+				throw new DAOException( "Échec de la création de l'utilisateur, aucune ligne ajoutée dans la table." );
+			}
+		} catch ( SQLException e ) {
+			throw new DAOException( e );
+		} finally {
+			fermeturesSilencieuses( valeursAutoGenerees, preparedStatement, connexion );
+		}
+	}
 
     /*
      * Méthode générique utilisée pour retourner un utilisateur depuis la base
@@ -54,14 +54,14 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
      * les objets passés en argument.
      */
     private Utilisateur trouver( String sql, Object... objets ) throws DAOException {
-        Connection connexion = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        Utilisateur utilisateur = null;
+    	Connection connexion = null;
+    	PreparedStatement preparedStatement = null;
+    	ResultSet resultSet = null;
+    	Utilisateur utilisateur = null;
 
-        try {
-            /* Récupération d'une connexion depuis la Factory */
-            connexion = daoFactory.getConnection();
+    	try {
+    		/* Récupération d'une connexion depuis la Factory */
+    		connexion = daoFactory.getConnection();
             /*
              * Préparation de la requête avec les objets passés en arguments
              * (ici, uniquement une adresse email) et exécution.
@@ -70,12 +70,12 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
             resultSet = preparedStatement.executeQuery();
             /* Parcours de la ligne de données retournée dans le ResultSet */
             if ( resultSet.next() ) {
-                utilisateur = map( resultSet );
+            	utilisateur = map( resultSet );
             }
         } catch ( SQLException e ) {
-            throw new DAOException( e );
+        	throw new DAOException( e );
         } finally {
-            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+        	fermeturesSilencieuses( resultSet, preparedStatement, connexion );
         }
 
         return utilisateur;
@@ -87,12 +87,18 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
      * ResultSet) et un bean Utilisateur.
      */
     private static Utilisateur map( ResultSet resultSet ) throws SQLException {
-        Utilisateur utilisateur = new Utilisateur();
-        utilisateur.setMailU( resultSet.getString( "mailU" ) );
-        utilisateur.setMdpU( resultSet.getString( "mdpU" ) );
-        utilisateur.setPseudoU( resultSet.getString( "pseudoU" ) );
-        utilisateur.setTypeU( resultSet.getString( "typeU" ) );
-        return utilisateur;
+    	Utilisateur utilisateur = new Utilisateur();
+    	utilisateur.setMailU( resultSet.getString( "mailU" ) );
+    	utilisateur.setMdpU( resultSet.getString( "mdpU" ) );
+    	utilisateur.setPseudoU( resultSet.getString( "pseudoU" ) );
+		utilisateur.setNomU( resultSet.getString( "nomU" ) );
+		utilisateur.setPrenomU( resultSet.getString( "prenomU" ) );
+		utilisateur.setNumAdrU( resultSet.getInt( "numAdrU" ) );
+		utilisateur.setNomAdrU( resultSet.getString( "nomAdrU" ) );
+		utilisateur.setCpU( resultSet.getInt( "cpU" ) );
+		utilisateur.setVilleU( resultSet.getString( "villeU" ) );
+    	utilisateur.setTypeU( resultSet.getString( "typeU" ) );
+    	return utilisateur;
     }
 
 }

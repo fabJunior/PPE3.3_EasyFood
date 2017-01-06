@@ -45,7 +45,7 @@
 						<c:if test="${pseudoErr == null || empty pseudoErr}">
 							<c:set var ="pseudoErr" value="Votre pseudo doit contenir au moints 6 caractères" scope="page" />
 						</c:if>
-						<label class="active" for="pseudo" data-error="${pseudoErr}" style="width: 100%">Pseudo*</label>
+						<label class="active" for="login" data-error="${pseudoErr}" style="width: 100%">Login*</label>
 					</div>
 				</div>
 

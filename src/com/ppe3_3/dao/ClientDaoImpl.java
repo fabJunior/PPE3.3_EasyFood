@@ -12,8 +12,8 @@ import com.ppe3_3.beans.Client;
 
 public class ClientDaoImpl implements ClientDao {
 
-    private static final String SQL_SELECT_PAR_EMAIL = "SELECT mailu, mdpu, pseudou, numadru FROM utilisateur WHERE mailu = ?";
-    private static final String SQL_INSERT           = "INSERT INTO utilisateur (mailu, mdpu, pseudou) VALUES (?, ?, ?)";
+    private static final String SQL_SELECT_PAR_EMAIL = "SELECT mailu, mdpu, pseudou, nomu, prenomu, numAdru, nomAdru, cpu, villeu, typeu FROM utilisateur WHERE mailu = ?";
+    private static final String SQL_INSERT           = "INSERT INTO utilisateur (mailu, mdpu, pseudou, nomu, prenomu, numAdru, nomAdru, cpu, villeu, typeu) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private DAOFactory          daoFactory;
 
@@ -36,7 +36,7 @@ public class ClientDaoImpl implements ClientDao {
 
         try {
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true, utilisateur.getMailU(), utilisateur.getMdpU(), utilisateur.getPseudoU() );
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_INSERT, true, utilisateur.getMailU(), utilisateur.getMdpU(), utilisateur.getPseudoU(), utilisateur.getNomU(), utilisateur.getPrenomU(), utilisateur.getNumAdrU(), utilisateur.getNomAdrU(), utilisateur.getCpU(), utilisateur.getVilleU(), utilisateur.getTypeU() );
             int statut = preparedStatement.executeUpdate();
             if ( statut == 0 ) {
                 throw new DAOException( "Échec de la création de l'utilisateur, aucune ligne ajoutée dans la table." );
@@ -91,6 +91,13 @@ public class ClientDaoImpl implements ClientDao {
         client.setMailU( resultSet.getString( "mailU" ) );
         client.setMdpU( resultSet.getString( "mdpU" ) );
         client.setPseudoU( resultSet.getString( "pseudoU" ) );
+        client.setNomU( resultSet.getString( "nomU" ) );
+        client.setPrenomU( resultSet.getString( "prenomU" ) );
+        client.setNumAdrU( resultSet.getInt( "numAdrU" ) );
+        client.setNomAdrU( resultSet.getString( "nomAdrU" ) );
+        client.setCpU( resultSet.getInt( "cpU" ) );
+        client.setVilleU( resultSet.getString( "villeU" ) );
+        client.setTypeU( resultSet.getString( "typeU" ) );
         return client;
     }
 

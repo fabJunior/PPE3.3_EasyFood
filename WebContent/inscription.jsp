@@ -16,6 +16,7 @@
 	<script type="text/javascript" src="<c:url value="/inc/js/jquery.validate.js"/>"></script>
 	<script src="<c:url value="/inc/js/materialize.js"/>"></script>
 	<script src="<c:url value="/inc/js/sweetalert.min.js"/>"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_rHgcJYJn99sKmgSNIK6ryEcOQKzlg1E&v=3.exp&libraries=places"></script>
 
 	<link type="text/css" rel="stylesheet" href="<c:url value="/inc/css/materialize.css"/>" />
 	<link type="text/css" rel="stylesheet" href="<c:url value="/inc/css/style.css"/>" />
@@ -36,10 +37,13 @@
 		<div class="row" style="padding-left: 10%; padding-right: 10%; padding-top: 20px;">
 			<form id="myform" class="col s12" method="post" action="inscription">
 
-				<!-- PSEUDO -->
 
 				<div class="row">
-					<div class="input-field col s12">
+
+					<!-- PSEUDO -->
+
+					<div class="input-field col s6">
+          				<i class="material-icons prefix">account_circle</i>
 						<input id="pseudo" name="pseudo" type="text" value="${utilisateur.pseudoU}" class="${form.erreurs['pseudo'] == null ? '' : 'invalid'}">
 						<c:set var ="pseudoErr" value="${form.erreurs['pseudo']}" scope="page" />
 						<c:if test="${pseudoErr == null || empty pseudoErr}">
@@ -47,37 +51,11 @@
 						</c:if>
 						<label class="active" for="pseudo" data-error="${pseudoErr}" style="width: 100%">Pseudo*</label>
 					</div>
-				</div>
 
-				<!-- MOT DE PASSE + CONFIRMATION -->
-
-				<div class="row">
-					<!-- MOT DE PASSE -->
+					<!-- EMAIL -->
+				
 					<div class="input-field col s6">
-						<input id="password" name="password" type="password" class="${form.erreurs['password'] == null ? '' : 'invalid'}">
-						<c:set var ="passwordErr" value="${form.erreurs['password']}" scope="page" />
-						<c:if test="${passwordErr == null || empty passwordErr}">
-							<c:set var ="passwordErr" value="Votre mot de passe doit contenir au moins 6 caractères" scope="page" />
-						</c:if>
-						<label class="active" for="password" data-error="${passwordErr}" style="width: 100%">Mot de passe*</label>
-					</div>
-
-					<!-- CONFIRMATION -->
-
-					<div class="input-field col s6">
-						<input id="password_confirm" name="password_confirm" type="password">
-						<c:set var ="password_confirmErr" value="${form.erreurs['password_confirm']}" scope="page" />
-						<c:if test="${password_confirmErr == null || empty password_confirmErr}">
-							<c:set var ="password_confirmErr" value="Les mots de passe sont differents" scope="page" />
-						</c:if>
-						<label class="active" for="password_confirm" data-error="${password_confirmErr}" style="width: 100%">Confirmation*</label>
-					</div>
-				</div>
-
-				<!-- EMAIL -->
-
-				<div class="row">
-					<div class="input-field col s12">
+          				<i class="material-icons prefix">email</i>
 						<input id="email" name="email" type="text" value="${utilisateur.mailU}" class="${form.erreurs['email'] == null ? '' : 'invalid'}">
 						<c:set var ="emailErr" value="${form.erreurs['email']}" scope="page" />
 						<c:if test="${emailErr == null || empty emailErr}">
@@ -87,20 +65,85 @@
 					</div>
 				</div>
 
+				<!-- MOT DE PASSE + CONFIRMATION -->
+
+				<div class="row">
+					<!-- MOT DE PASSE -->
+					<div class="input-field col s6">
+          				<i class="material-icons prefix">lock</i>
+						<input id="password" name="password" type="password" class="${form.erreurs['password'] == null ? '' : 'invalid'}">
+						<c:set var ="passwordErr" value="${form.erreurs['password']}" scope="page" />
+						<c:if test="${passwordErr == null || empty passwordErr}">
+							<c:set var ="passwordErr" value="Votre mot de passe doit contenir au moins 6 caractères" scope="page" />
+						</c:if>
+						<label class="active" for="password" data-error="${passwordErr}" style="width: 100%">Mot de passe*</label>
+					</div>
+
+					<!-- CONFIRMATION -->
+					<div class="input-field col s6">
+          				<!-- <i class="material-icons prefix">lock_outline</i> -->
+						<input id="password_confirm" name="password_confirm" type="password">
+						<c:set var ="password_confirmErr" value="${form.erreurs['password_confirm']}" scope="page" />
+						<c:if test="${password_confirmErr == null || empty password_confirmErr}">
+							<c:set var ="password_confirmErr" value="Les mots de passe sont differents" scope="page" />
+						</c:if>
+						<label class="active" for="password_confirm" data-error="${password_confirmErr}" style="width: 100%">Confirmation*</label>
+					</div>
+				</div>
+
+				<!-- PRENOM + NOM -->
+
+				<div class="row">
+					<div class="input-field col s6">
+						<i class="material-icons prefix">assignment</i>
+						<input id="prenom" name="prenom" type="text" class="${form.erreurs['prenom'] == null ? '' : 'invalid'}">
+						<c:set var ="prenomErr" value="${form.erreurs['prenom']}" scope="page" />
+						<c:if test="${prenomdErr == null || empty prenomErr}">
+							<c:set var ="prenomErr" value="Votre prénom ne peut pas être vide" scope="page" />
+						</c:if>
+						<label class="active" for="prenom" data-error="${prenomErr}" style="width: 100%">Prénom*</label>
+					</div>
+					<div class="input-field col s6">
+						<!-- <i class="material-icons prefix">assignment</i> -->
+						<input id="nom" name="nom" type="text" class="${form.erreurs['nom'] == null ? '' : 'invalid'}">
+						<c:set var ="nomErr" value="${form.erreurs['nom']}" scope="page" />
+						<c:if test="${nomdErr == null || empty nomErr}">
+							<c:set var ="nomErr" value="Votre nom ne peut pas être vide" scope="page" />
+						</c:if>
+						<label class="active" for="nom" data-error="${nomErr}" style="width: 100%">Nom*</label>
+					</div>
+				</div>
+
+				<!-- Adresse -->
+
+				<div class="row">
+					<div class="input-field col s12">
+						<i class="material-icons prefix">location_on</i>
+						<input id="adresse" name="adresse" type="text" placeholder="" onFocus="geolocate()"  class="${form.erreurs['adresse'] == null ? '' : 'invalid'}">
+						<c:set var ="adresseErr" value="${form.erreurs['adresse']}" scope="page" />
+						<c:if test="${adresseErr == null || empty adresseErr}">
+							<c:set var ="adresseErr" value="Veuillez sélectionner une adresse" scope="page" />
+						</c:if>
+						<label class="active" for="adresse" data-error="${adresseErr}" style="width: 100%">Adresse*</label>
+					</div>
+				</div>
+
+				<!-- CLIENT/RESTAURANT -->
+
 				<h4>
 					<span class="teal-text text-lighten-2">Je suis un :</span>
 				</h4>
 
 				<div class="row">
 					<div class="input-field col s6">
-						<input name="type" type="radio" id="type1" checked/>
-						<label for="type1">Client</label>
+						<input name="type" type="radio" id="cli" value="cli" checked/>
+						<label for="cli">Client</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s6">
-						<input name="type" type="radio" id="type2"/>
-						<label for="type2">Restaurant</label>
+						<input name="type" type="radio" id="resto" value="resto" />
+						<label for="resto">Restaurant</label>
 					</div>
 				</div>
 
@@ -125,6 +168,39 @@
 	
 	<c:import url="/inc/vue/footer.jsp"></c:import>
 
+	<script>
+		var autocomplete
+
+		function initialize() {
+
+			var input = document.getElementById('adresse');
+			autocomplete = new google.maps.places.Autocomplete(input);
+
+			autocomplete.addListener('place_changed', fillInAddress);
+		}
+
+		function geolocate() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(position) {
+					var geolocation = {
+						lat: position.coords.latitude,
+						lng: position.coords.longitude
+					};
+					var circle = new google.maps.Circle({
+						center: geolocation,
+						radius: position.coords.accuracy
+					});
+					autocomplete.setBounds(circle.getBounds());
+				});
+			}
+		}
+
+		function fillInAddress() {
+			$("#adresse").removeClass("invalid").addClass("valid");
+		}
+
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
 
 	<script type="text/javascript">
 		$.fn.extend({ 
@@ -225,9 +301,29 @@
 			}
 		});
 
+		$("#prenom").on("input", function (e) {
+			if ($(this).val() == "") {
+				$(this).removeClass("valid").addClass("invalid");
+			} else {
+				$(this).removeClass("invalid").addClass("valid");
+			}
+		});
+
+		$("#nom").on("input", function (e) {
+			if ($(this).val() == "") {
+				$(this).removeClass("valid").addClass("invalid");
+			} else {
+				$(this).removeClass("invalid").addClass("valid");
+			}
+		});
+
+		$("#adresse").on("input", function (e) {
+			$(this).removeClass("valid").addClass("invalid");
+		});
+
 		$("#myform").validate({
 			submitHandler: function(form) {
-				var form_data= [$("#pseudo"), $("#password"), $("#password_confirm"), $("#email")];
+				var form_data= [$("#pseudo"), $("#password"), $("#password_confirm"), $("#email"), $("#nom"), $("#prenom"), $("#adresse")];
 				var error_free=true;
 
 				//Fausse erreur, la syntaxe est bonne
@@ -241,6 +337,39 @@
 				}
 
 				if (error_free){
+
+					// Get the place details from the autocomplete object.
+					var place = autocomplete.getPlace();
+					var componentForm = {
+						street_number: 'short_name', 	//num rue
+						route: 'long_name',				// nom rue
+						locality: 'long_name',			// ville
+						postal_code: 'short_name'		//cp
+					};
+					var componentFormName = {
+						street_number: 'numAdr', 	//num rue
+						route: 'nomAdr',			// nom rue
+						locality: 'villeAdr',		// ville
+						postal_code: 'cpAdr'		//cp
+					};
+
+					var arr = new Array();
+
+					// Get each component of the address from the place details
+					// and fill the corresponding field on the form.
+					for (var i = 0; i < place.address_components.length; i++) {
+						var addressType = place.address_components[i].types[0];
+						if (componentForm[addressType]) {
+							var val = place.address_components[i][componentForm[addressType]];
+							eval("var " + componentFormName[addressType] + " = val");
+						}
+					}
+
+					$("<input>", { type: "hidden", name: "numAdr", value: numAdr }).appendTo("#myform");
+					$("<input>", { type: "hidden", name: "nomAdr", value: nomAdr }).appendTo("#myform");
+					$("<input>", { type: "hidden", name: "villeAdr", value: villeAdr }).appendTo("#myform");
+					$("<input>", { type: "hidden", name: "cpAdr", value: cpAdr }).appendTo("#myform");
+					
 					form.submit();
 				}
 			}
