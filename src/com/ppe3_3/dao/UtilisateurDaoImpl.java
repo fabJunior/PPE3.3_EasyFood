@@ -13,6 +13,7 @@ import com.ppe3_3.beans.Utilisateur;
 public class UtilisateurDaoImpl implements UtilisateurDao {
 
 	private static final String SQL_SELECT_PAR_EMAIL = "SELECT mailu, mdpu, pseudou, nomu, prenomu, numAdru, nomAdru, cpu, villeu, typeu FROM utilisateur WHERE mailu = ?";
+	private static final String SQL_SELECT_PAR_PSEUDO = "SELECT mailu, mdpu, pseudou, nomu, prenomu, numAdru, nomAdru, cpu, villeu, typeu FROM utilisateur WHERE pseudou = ?";
 	private static final String SQL_INSERT           = "INSERT INTO utilisateur (mailu, mdpu, pseudou, nomu, prenomu, numAdru, nomAdru, cpu, villeu, typeu) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	private DAOFactory          daoFactory;
@@ -23,8 +24,12 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
 	/* Implémentation de la méthode définie dans l'interface UtilisateurDao */
 	@Override
-	public Utilisateur trouver( String email ) throws DAOException {
-		return trouver( SQL_SELECT_PAR_EMAIL, email );
+	public Utilisateur trouver( String login ) throws DAOException {
+		if (login.matches( "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$" )) {
+			return trouver( SQL_SELECT_PAR_EMAIL, login );
+		}else{
+			return trouver( SQL_SELECT_PAR_PSEUDO, login );
+		}
 	}
 
 	/* Implémentation de la méthode définie dans l'interface UtilisateurDao */

@@ -41,11 +41,11 @@
 				<div class="row">
 					<div class="input-field col s12">
 						<input id="login" name="login" type="text" class="${form.erreurs['pseudo'] == null ? '' : 'invalid'}">
-						<c:set var ="pseudoErr" value="${form.erreurs['pseudo']}" scope="page" />
-						<c:if test="${pseudoErr == null || empty pseudoErr}">
-							<c:set var ="pseudoErr" value="Votre pseudo doit contenir au moints 6 caractères" scope="page" />
+						<c:set var ="loginErr" value="${form.erreurs['login']}" scope="page" />
+						<c:if test="${loginErr == null || empty loginErr}">
+							<c:set var ="loginErr" value="Veuillez renseigner un login" scope="page" />
 						</c:if>
-						<label class="active" for="login" data-error="${pseudoErr}" style="width: 100%">Login*</label>
+						<label class="active" for="login" data-error="${loginErr}" style="width: 100%">Login*</label>
 					</div>
 				</div>
 
@@ -141,7 +141,7 @@
 		});
 
 		$("#login").on("input", function (e) {
-			if ($(this).val().length < 6) {
+			if ($(this).val().length  == 0) {
 				$(this).removeClass("valid").addClass("invalid");
 			} else {
 				$(this).removeClass("invalid").addClass("valid");
