@@ -7,3 +7,49 @@ body {
 main {
 	flex: 1 0 auto;
 }
+
+.img-pres{
+	border-radius: 50%;
+	width: 200px;
+height: 200px;
+}
+
+.accueil-img{
+	background-image: url(http://www.restaurant-avenue.fr/img/site/carousel/salle-restaurant.jpg);
+	height: 500px;
+	width: 100%;
+	background-size: cover;
+	background-position:50% 50%;
+	background-repeat: no-repeat;
+	z-index: -1;
+	position: relative;
+}
+
+.accueil-search{
+	height: 150px;
+	width: 100%;
+	margin-top: -70px;
+	z-index: 1;
+	position: relative;
+	
+}
+
+.accueil-search-span{
+	height: 150px;
+	width: 900px;
+	background-color:#05172B;
+	position: relative;
+	display: block;
+	margin-top: 0;
+	margin: 0 auto;
+}
+
+.accueil-nav{
+	width: 550px;
+	width: 550px;
+	z-index: 5;
+	position: relative;
+	margin: 0 auto;
+	background-color: #4DB6AC;
+	margin-top: -96px;
+}
